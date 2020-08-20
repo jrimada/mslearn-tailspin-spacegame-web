@@ -1,12 +1,5 @@
-<<<<<<< HEAD
-# ASP.NET Core
-# Build and test ASP.NET Core projects targeting .NET Core.
-# Add steps that run tests, create a NuGet package, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
-=======
 trigger:
 - '*'
->>>>>>> afeea19ee7cecec3831e54d8cbba9b4dd63effe5
 
 pool:
   vmImage: 'ubuntu-18.04'
@@ -22,10 +15,6 @@ steps:
 - task: UseDotNet@2
   displayName: 'Use .NET Core SDK $(dotnetSdkVersion)'
   inputs:
-<<<<<<< HEAD
-    packageType: sdk
-=======
->>>>>>> afeea19ee7cecec3831e54d8cbba9b4dd63effe5
     version: '$(dotnetSdkVersion)'
 
 - task: Npm@1
@@ -33,11 +22,7 @@ steps:
   inputs:
     verbose: false
 
-<<<<<<< HEAD
-- script: './node_modules/.bin/node-sass $(wwwrootDir) --output $(wwwrootDir)/wwwroot'
-=======
 - script: './node_modules/.bin/node-sass $(wwwrootDir) --output $(wwwrootDir)'
->>>>>>> afeea19ee7cecec3831e54d8cbba9b4dd63effe5
   displayName: 'Compile Sass assets'
 
 - task: gulp@1
@@ -53,16 +38,6 @@ steps:
     command: 'restore'
     projects: '**/*.csproj'
 
-<<<<<<< HEAD
-- template: templates/build.yml
-  parameters:
-    buildConfiguration: 'Debug'
-
-- template: templates/build.yml
-  parameters:
-    buildConfiguration: 'Release'
-    
-=======
 - task: DotNetCoreCLI@2
   displayName: 'Build the project - $(buildConfiguration)'
   inputs:
@@ -77,7 +52,7 @@ steps:
     arguments: '--no-build --configuration $(buildConfiguration)'
     publishTestResults: true
     projects: '**/*.Tests.csproj'
-    
+
 - task: DotNetCoreCLI@2
   displayName: 'Publish the project - $(buildConfiguration)'
   inputs:
@@ -87,7 +62,6 @@ steps:
     arguments: '--no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/$(buildConfiguration)'
     zipAfterPublish: true
 
->>>>>>> afeea19ee7cecec3831e54d8cbba9b4dd63effe5
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: drop'
   condition: succeeded()
